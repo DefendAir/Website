@@ -1,0 +1,387 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #e0e7ff;
+            background: #080b1a;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(8, 11, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 2px 20px rgba(99, 102, 241, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #60a5fa, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e7ff;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .page-header {
+            background: radial-gradient(circle at top right, #1e1b4b, #080b1a);
+            padding: 10rem 5% 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #60a5fa, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .solution-card {
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
+        }
+
+        .solution-card h3 {
+            color: #818cf8;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .tech-specs {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .tech-spec {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-demo {
+            background: #0f172a;
+            padding: 4rem 5%;
+            text-align: center;
+            position: relative;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .demo-item {
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .demo-item:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: scale(1.05);
+        }
+
+        .comparison-section {
+            padding: 4rem 5%;
+            background: radial-gradient(circle at center, #1e1b4b, #080b1a);
+        }
+
+        .comparison-table {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0 1rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        .comparison-table th {
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+        }
+
+        .comparison-table tr td:first-child {
+            border-radius: 10px 0 0 10px;
+        }
+
+        .comparison-table tr td:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        .cta-section {
+            padding: 4rem 5%;
+            text-align: center;
+            background: linear-gradient(45deg, #1e1b4b, #080b1a);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #4f46e5, #6366f1);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        footer {
+            background: #0f172a;
+            color: #e0e7ff;
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+        }
+        
+        </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DefendAir Technologies</div>
+        <div class="nav-links">
+            <a href="#home"><a href="index.html">Home</a></a>
+            <a href="#about"><a href="index2.html">About</a></a>
+            
+            
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Advanced  Solutions</h1>
+        <p>Next-generation protection powered by quantum technology and artificial intelligence</p>
+    </section>
+
+    <section class="solutions-grid">
+        <div class="solution-card">
+            <h3>Drone Shield™</h3>
+            <p>Advanced drone encryption system providing unbreakable security for aerial communications and control systems.</p>
+            <div class="tech-specs">
+                <div class="tech-spec">
+                    <span>Encryption Level:</span>
+                    <span>256-bit</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Response Time:</span>
+                    <span> 5ms</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Coverage Range:</span>
+                    <span>50km</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="solution-card">
+            <h3>Neural Defense Grid™</h3>
+            <p>AI-powered threat detection and response network with real-time adaptation to emerging threats.</p>
+            <div class="tech-specs">
+                <div class="tech-spec">
+                    <span>AI Processing:</span>
+                    <span>Neural-V4</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Detection Rate:</span>
+                    <span>79.99%</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Learning Cycle:</span>
+                    <span>Continuous</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="solution-card">
+            <h3>VIP Security™</h3>
+            <p>Revolutionary holographic command interface for intuitive control of defense systems and real-time tactical analysis.</p>
+            <div class="tech-specs">
+                <div class="tech-spec">
+                    <span>Resolution:</span>
+                    <span>8K Quantum</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Interface:</span>
+                    <span>Neural-Link</span>
+                </div>
+                <div class="tech-spec">
+                    <span>Response:</span>
+                    <span>Real-time</span>
+                </div>
+               
+            </div>
+        </div>
+        <div class="solution-card">
+            <h3>Crowd Monitoring™</h3>
+            <p>
+                Our drones are equipped with advanced capabilities for crowd monitoring, offering real-time surveillance and analytics to enhance public safety and security during large gatherings and events.
+            </p>
+            
+            <div class="tech-spec">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="interactive-demo">
+        <h2>Interactive Solutions Demo</h2>
+        <div class="demo-container">
+            <p>Experience our advanced drone systems in action through our interactive demonstration platform.</p>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Threat Detection</h3>
+                    <p>See our AI in action as it identifies and classifies potential threats</p>
+                </div>
+                <div class="demo-item">
+                    <h3>Response Time</h3>
+                    <p>Watch real-time response capabilities of our drone systems</p>
+                </div>
+                <!-- <div class="demo-item">
+                    <h3>Command Interface</h3>
+                    <p>Experience our intuitive holographic control system</p> -->
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 
+    <section class="comparison-section">
+        <h2 style="text-align: center; margin-bottom: 3rem; color: #818cf8;">Solution Comparison</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Features</th>
+                    <th>Standard</th>
+                    <th>Advanced</th>
+                    <th>Enterprise</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Quantum Encryption</td>
+                    <td>128-Qubit</td>
+                    <td>256-Qubit</td>
+                    <td>512-Qubit</td>
+                </tr>
+                <tr>
+                    <td>AI Processing</td>
+                    <td>Neural-V2</td>
+                    <td>Neural-V3</td>
+                    <td>Neural-V4</td>
+                </tr>
+                <tr>
+                    <td>Coverage Range</td>
+                    <td>200km</td>
+                    <td>500km</td>
+                    <td>1000km</td>
+                </tr>
+                <tr>
+                    <td>Response Time</td>
+                    <td>< 5ms</td>
+                    <td>< 2ms</td>
+                    <td>< 1ms</td>
+                </tr>
+            </tbody>
+        </table>
+    </section> -->
+
+    <section class="cta-section">
+        <h2 style="margin-bottom: 2rem; color: #818cf8;">Ready to Secure Your privacy</h2>
+        <p style="margin-bottom: 2rem">Contact our drone defense specialists for a personalized consultation</p>
+drone
+    </section>
+
+    <footer>
+        <p>© 2025 DefendAir Technologies. Advancing Aerial Defense Through Innovation.</p>
+    </footer>
+</body>
+</html>
+
